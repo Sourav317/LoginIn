@@ -1,6 +1,20 @@
 const express = require('express');
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+//adding routers
+const tuna1 = require('./Routes/users');
+
+app.set('view engine','ejs');
+app.set('views','./Views');
+
+app.use('/au',tuna1);
+
+
+
+const PORT = 5000 || process.env.PORT;
+
+app.get("/",(req,res) =>{
+    res.send("THis is my home Page.....Cool");
+});
 
 app.listen(PORT , console.log(`Server is running on ${PORT}`));
