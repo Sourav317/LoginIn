@@ -1,9 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyparser=require('body-parser');
+const cookieparser = require('cookie-parser');
 
-const db = require('./Config/mongod_connect');
 
 const app = express();
+
+//connecting to mongodb and the folder where schema is defined
+const db = require('./Config/mongod_connect');
+const user = require('./models/mongoose');
+
+app.use(express.urlencoded());
+
+app.use(cookieparser());
+
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.json());
+
+
 //adding routers
 const tuna1 = require('./Routes/users');
 

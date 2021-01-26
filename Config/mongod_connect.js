@@ -1,7 +1,7 @@
 const mongoose= require('mongoose');
 
 //setting the connection to db with db name Manual_AUT
-mongoose.connect('mongodb://localhost:27017/Manual_AUT', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/Manual_AUT', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 const db = mongoose.connection;
 
