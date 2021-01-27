@@ -19,6 +19,32 @@ module.exports.signUp = function(req,res)
 }
 
 
+//rendering the profile page
+module.exports.profile = function(req, res){
+    //add checks....anyone can enter profile page without authenticating .... by simply modifying the URL
+    //checking if someone is logged in.....then only he/she can see the profile page
+    if(req.cookies.user_id){
+
+        //matching the user with db data
+        User.findById(req.cookies.user_id,function(err,user){
+            if(user){
+                return res.render('User_profile',{
+                    title: "User Profile"
+                })
+            }
+            else{
+                return res.redirect('/au/sign-in');
+            }
+        });
+
+    }else{
+        //if no data in cookie then redirct to sign-in page
+        return res.redirect('/au/sign-in');
+    }
+
+}
+
+
 //get the data from the signup form to store in db
 module.exports.create = function(req, res){
     if (req.body.password != req.body.confirm_password){
@@ -58,7 +84,7 @@ module.exports.createSession = function(req,res){
                 }
             //handle session creation( password matches )
                 res.cookie('user_id',user.id);
-                return res.redirect('/au/check');
+                return res.redirect('/au/profile');
         }else{
             //handle user not found
             return res.redirect('back');
