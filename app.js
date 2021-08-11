@@ -31,7 +31,7 @@ app.use('/au',tuna1);
 const PORT = 5000 || process.env.PORT;
 
 app.get("/",(req,res) =>{
-    res.send("THis is my home Page.....Cool");
+    res.render('redi_User');
 });
 
 app.listen(PORT , console.log(`Server is running on ${PORT}`));
